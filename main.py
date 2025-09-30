@@ -14,6 +14,7 @@ def main():
 
     try:
         user_prompt = sys.argv[1]
+        flags = sys.argv[2:]
     except Exception as e:
         print("No request was provided.")
         sys.exit(1)
@@ -25,10 +26,14 @@ def main():
     response = client.models.generate_content(
         model='gemini-2.0-flash-001', contents=messages
     )
-    print(response.text)
 
-    print("Prompt tokens:", response.usage_metadata.prompt_token_count)
-    print("Response tokens:", response.usage_metadata.candidates_token_count)
+    if "--verbose" in flags:
+        print(f"User prompt: {user_prompt}")
+        print(f"Prompt tokens: {response.usage_metadata.prompt_token_count}")
+        print(f"Response tokens: {response.usage_metadata.candidates_token_count}")
+
+    print(f"{response.text}")
+
 
 
 if __name__ == "__main__":

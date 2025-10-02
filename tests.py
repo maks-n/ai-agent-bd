@@ -1,5 +1,6 @@
 from functions.get_files_info import get_files_info
 from functions.get_file_content import get_files_content
+from functions.write_file import write_file
 
 def test():
     result = get_files_info("calculator", ".")
@@ -41,6 +42,22 @@ def test():
     print("Result for \'pkg/doest_not_exist.py\' file:")
     print(result)
     print("")
+
+    result = write_file("calculator", "lorem.txt", "wait, this isn't lorem ipsum")
+    print(f'Result for "lorem.txt" file:')
+    print(result)
+    print("")
+
+    result = write_file("calculator", "pkg/morelorem.txt", "lorem ipsum dolor sit amer")
+    print(f'Result for "pkg/morelorem.txt" file:')
+    print(result)
+    print("")
+
+    result = write_file("calculator", "/tmp/temp.txt", "this should not be allowed")
+    print(f'Result for "/tmp/temp.txt" file:')
+    print(result)
+    print("")
+
 
 
 if __name__ == "__main__":
